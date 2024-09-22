@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button {
+  @apply
+  bg-zinc-900 
+  font-bold 
+  hover:scale-95 
+  text-center 
+  transition-all 
+  px-4 
+  py-2 
+  rounded-md 
+  text-white
+}
+
+.swiper-button-next, .swiper-button-prev {
+  @apply text-zinc-800
+}
+
+.swiper-button-next, .swiper-button-prev {
+  @apply size-5
+}
