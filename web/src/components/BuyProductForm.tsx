@@ -3,18 +3,26 @@ import { loadStripe } from "@stripe/stripe-js";
 import { createCheckoutSession } from "../http/create-checkout-session";
 import { LoaderCircle } from "lucide-react";
 
-
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 export function BuyProductForm({ productId }: { productId: string }) {
   const [quant, setQuant] = useState(1);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   async function handleCheckout() {
     setIsLoading(true);
+    setErrorMessage(null);
+
     if (quant > 0 && selectedSize) {
       const response = await createCheckoutSession(productId, quant);
+
+      if ('error' in response) {
+        setErrorMessage(response.error);
+        setIsLoading(false);
+        return;
+      }
 
       const stripe = await stripePromise;
 
@@ -24,9 +32,11 @@ export function BuyProductForm({ productId }: { productId: string }) {
 
         if (error) {
           console.error('Erro no redirecionamento:', error);
+          setErrorMessage('Erro no redirecionamento.');
         }
       }
     }
+
     setIsLoading(false);
   }
 
@@ -66,6 +76,8 @@ export function BuyProductForm({ productId }: { productId: string }) {
         </button>
       </div>
 
+
+
       <button
         type="button"
         onClick={handleCheckout}
@@ -80,6 +92,11 @@ export function BuyProductForm({ productId }: { productId: string }) {
           'Finalizar Compra'
         )}
       </button>
+      {errorMessage && (
+        <div className="mt-1 text-red-600">
+          {errorMessage}
+        </div>
+      )}
     </form>
   );
 }
