@@ -1,6 +1,8 @@
 # Stripe Integration Project
 This project integrates a checkout system using Stripe. The backend is built with Fastify and Zod for data validation, while the frontend is built with Vite, TailwindCSS, and React Router, allowing users to select products and complete the checkout process.
 
+Check out the frontend here: [Live Demo](https://smp-stripe-integration.vercel.app/). Please note that the checkout functionality will not work, as the backend server is not deployed.
+
 ## Installation
 ### 1. Clone the repository:
 ```bash
