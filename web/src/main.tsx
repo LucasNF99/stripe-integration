@@ -21,11 +21,11 @@ const router = createBrowserRouter([
     element: <Product />
   },
   {
-    path: '/success',
+    path: '/sucesso',
     element: <Success />
   },
   {
-    path: '/cancel',
+    path: '/pedido-cancelado',
     element: <Cancel />
   },
 ])

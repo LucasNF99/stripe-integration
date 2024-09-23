@@ -28,8 +28,8 @@ export const createCheckoutSessionRoute: FastifyPluginAsyncZod = async (app) => 
           },
         ],
         mode: 'payment',
-        success_url: `${env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${env.CLIENT_URL}/cancel`,
+        success_url: `${env.CLIENT_URL}/sucesso?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${env.CLIENT_URL}/pedido-cancelado`,
       });
 
       reply.send({ sessionId: session.id });
